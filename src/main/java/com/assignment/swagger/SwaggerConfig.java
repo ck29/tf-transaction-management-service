@@ -15,7 +15,7 @@ public class SwaggerConfig {
   @Bean
   public OpenAPI accountManagementModel(){
     return new OpenAPI()
-        .info(new Info().title(SwaggerResources.ACCOUNT_MANAGEMENT));
+        .info(new Info().title(SwaggerResources.TRANSACTION_MANAGEMENT));
 
   }
 
