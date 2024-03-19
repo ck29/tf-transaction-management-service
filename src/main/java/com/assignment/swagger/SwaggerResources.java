@@ -2,7 +2,6 @@ package com.assignment.swagger;
 
 public class SwaggerResources {
 
-  public static final String ACCOUNT_MANAGEMENT = "Account Management API";
-  public static final String ACCOUNT_CONTROLLER = "Account controller";
-  public static final String BALANCE_CONTROLLER = "Balance controller";
+  public static final String TRANSACTION_MANAGEMENT = "Transaction Management API";
+  public static final String TRANSACTION_CONTROLLER = "Transaction controller";
 }
