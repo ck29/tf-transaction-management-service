@@ -103,12 +103,8 @@ Make sure the following tools are installed on your local machine.
 
 1. Once the application is running, we can query the API using various method. The details about the endpoints are available using openapi specification. The specification can be downloaded using following link.
 
-   [OAS](https://github.com/ck29/tf-transaction-management-service/blob/master/data/swagger.yml)
-   
+   [Swagger(Open API Specification)](https://github.com/ck29/tf-transaction-management-service/blob/master/data/swagger.yml)
 
-2. Run application using POSTMAN. Download and import POSTMAN package.
-
-   [Postman package](https://github.com/ck29/tf-transaction-management-service/blob/master/data/transaction_service.postman_collection.json)
 
 ### Create new transaction
 ```shell
