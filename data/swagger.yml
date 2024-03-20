@@ -1,0 +1,50 @@
+openapi: 3.0.3
+info:
+  title: Transaction Management API
+  version: "v1"
+
+servers:
+  - url: http://localhost:8085/tf/service/transaction
+    description: Generated server url
+paths:
+  /new:
+    post:
+      tags:
+        - Transaction controller
+      summary: create new transaction.
+      operationId: createTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+components:
+  schemas:
+    TransactionRequest:
+      type: object
+      properties:
+        recipientAccount:
+          type: string
+        senderAccount:
+          type: string
+        amount:
+          type: number
+        transactionMessage:
+          type: string
+    TransactionResponse:
+      type: object
+      properties:
+        accountId:
+          type: string
+        status:
+          type: string
+        lastTransactionAmount:
+          type: number

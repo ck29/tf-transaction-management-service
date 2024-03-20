@@ -1,6 +1,5 @@
 package com.assignment.tf.client;
 
-import com.assignment.tf.controller.response.BalanceResponse;
 import com.assignment.tf.controller.response.TransactionResponse;
 import com.assignment.tf.exception.AccountNotFoundException;
 import com.assignment.tf.exception.InsufficientFundException;
@@ -14,7 +13,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -45,9 +43,7 @@ public class AccountServiceClient implements AccountServiceInterface{
           HttpMethod.PUT, httpEntity, TransactionResponse.class);
     } catch (RestClientException e) {
       if(response!=null) {
-        if (response.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(400))) {
-          throw new InsufficientFundException();
-        } else if (response.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(404))) {
+       if (response.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(404))) {
           throw new AccountNotFoundException();
         } else {
           throw e;
