@@ -22,10 +22,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
-@ExtendWith(MockitoExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+
 @AutoConfigureMockMvc
-//@Disabled
 public class AbstractControllerIntegrationTest {
     @Autowired
     protected MockMvc mockMvc;
