@@ -1,4 +1,4 @@
-# tf-transaction-management-service
+# transaction-management-service
 [![Java CI with Gradle](https://github.com/ck29/tf-transaction-management-service/actions/workflows/gradle.yml/badge.svg)](https://github.com/ck29/tf-transaction-management-service/actions/workflows/gradle.yml)
 
 
@@ -18,7 +18,6 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="##installation-manual">Installation</a></li>
-        <li><a href="##integration-test">Integration Test</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>

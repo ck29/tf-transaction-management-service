@@ -13,13 +13,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @RequiredArgsConstructor
 @Slf4j
 @Service
-public class AccountServiceClient implements AccountServiceInterface{
+public class AccountServiceClient implements AccountServiceInterface {
 
   private final RestTemplate restTemplate;
 
@@ -41,13 +42,11 @@ public class AccountServiceClient implements AccountServiceInterface{
     try {
       response = restTemplate.exchange(creditEndpoint,
           HttpMethod.PUT, httpEntity, TransactionResponse.class);
-    } catch (RestClientException e) {
-      if(response!=null) {
-       if (response.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(404))) {
-          throw new AccountNotFoundException();
-        } else {
-          throw e;
-        }
+    } catch (HttpClientErrorException e) {
+      if (e.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(404))) {
+        throw new AccountNotFoundException();
+      } else {
+        throw e;
       }
     }
     return response.getBody();
@@ -63,19 +62,19 @@ public class AccountServiceClient implements AccountServiceInterface{
         headers);
     ResponseEntity<TransactionResponse> response = null;
     try {
-      response = restTemplate.exchange(debitEndpoint,HttpMethod.PUT, httpEntity, TransactionResponse.class);
-    } catch (RestClientException e) {
+      response = restTemplate.exchange(debitEndpoint, HttpMethod.PUT, httpEntity,
+          TransactionResponse.class);
+    } catch (HttpClientErrorException e) {
+      if (e.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(400))) {
+        throw new InsufficientFundException();
 
-      if(response!=null && response.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(400))){
-          throw new InsufficientFundException();
-
-      }else if(response.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(404))){
+      } else if (e.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(404))) {
         throw new AccountNotFoundException();
-      }else{
+      } else {
         throw e;
       }
-
     }
+
     return response.getBody();
   }
 }
