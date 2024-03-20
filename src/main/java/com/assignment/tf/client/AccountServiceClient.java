@@ -41,7 +41,7 @@ public class AccountServiceClient implements AccountServiceInterface {
     ResponseEntity<TransactionResponse> response = null;
     try {
       response = restTemplate.exchange(creditEndpoint,
-          HttpMethod.PUT, httpEntity, TransactionResponse.class);
+          HttpMethod.POST, httpEntity, TransactionResponse.class);
     } catch (HttpClientErrorException e) {
       if (e.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(404))) {
         throw new AccountNotFoundException();
@@ -62,7 +62,7 @@ public class AccountServiceClient implements AccountServiceInterface {
         headers);
     ResponseEntity<TransactionResponse> response = null;
     try {
-      response = restTemplate.exchange(debitEndpoint, HttpMethod.PUT, httpEntity,
+      response = restTemplate.exchange(debitEndpoint, HttpMethod.POST, httpEntity,
           TransactionResponse.class);
     } catch (HttpClientErrorException e) {
       if (e.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(400))) {
