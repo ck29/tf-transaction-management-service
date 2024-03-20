@@ -15,7 +15,7 @@ public class TransactionControllerIntegrationTest extends AbstractControllerInte
         "aSender", new BigDecimal(500), "test_message");
 
     //Expecting 404 error as sender and receiver are not available in account db.
-    MvcResult result = performPost("/tf/service/transaction/new", request)
+    MvcResult result = performPost("/new", request)
         .andExpect(status().is4xxClientError())
         .andReturn();
   }
