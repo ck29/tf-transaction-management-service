@@ -68,7 +68,7 @@ Clone the project and get the prequisites setup.
 Make sure the following tools are installed on your local machine.
 * Java
   ```sh
-  apt-get install openjdk-8-jdk
+  apt-get install openjdk-17-jdk
   ```
 
 * Git
