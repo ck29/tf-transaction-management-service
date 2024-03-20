@@ -6,7 +6,6 @@ import com.assignment.tf.controller.request.TransactionStatus;
 import com.assignment.tf.controller.request.TransactionType;
 import com.assignment.tf.controller.response.TransactionResponse;
 import com.assignment.tf.exception.AccountNotFoundException;
-import com.assignment.tf.exception.InsufficientFundException;
 import com.assignment.tf.mapper.TransactionMapper;
 import com.assignment.tf.repository.TransactionRepositoryService;
 import com.assignment.tf.repository.entities.TransactionEntity;
@@ -30,7 +29,7 @@ public class TransactionService {
       client.credit(transactionRequest.recipientAccount(), transactionRequest.amount());
       entity = repositoryService.saveTransaction(transactionRequest, TransactionType.CREDIT);
 
-    } catch (AccountNotFoundException | InsufficientFundException e) {
+    } catch (AccountNotFoundException e) {
 
       client.credit(transactionRequest.senderAccount(), transactionRequest.amount());
       repositoryService.saveTransaction(transactionRequest, TransactionType.CREDIT);

@@ -3,6 +3,7 @@ package com.assignment.tf.repository;
 import com.assignment.tf.controller.request.TransactionRequest;
 import com.assignment.tf.controller.request.TransactionType;
 import com.assignment.tf.repository.entities.TransactionEntity;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class TransactionRepositoryService {
   private final TransactionRepository repository;
 
   public List<TransactionEntity> getAllTransactions(String senderid) {
-    return repository.findBySender(senderid).orElse(null);
+    return repository.findBySender(senderid).orElse(new ArrayList<TransactionEntity>());
   }
 
   public TransactionEntity saveTransaction(TransactionRequest request, TransactionType type) {
