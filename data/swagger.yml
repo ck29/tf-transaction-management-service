@@ -1,13 +1,12 @@
-openapi: 3.0.3
+openapi: 3.0.1
 info:
   title: Transaction Management API
-  version: "v1"
-
+  version: v1
 servers:
-  - url: http://localhost:8085/tf/service/transaction
+  - url: http://localhost:8085/transaction-service/v1/api
     description: Generated server url
 paths:
-  /new:
+  /transactions:
     post:
       tags:
         - Transaction controller
@@ -26,6 +25,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TransactionResponse'
+  /transactions/{iban}:
+    get:
+      tags:
+        - Transaction controller
+      summary: Get all transactions.
+      operationId: getTransaction
+      parameters:
+        - name: iban
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
 components:
   schemas:
     TransactionRequest:
@@ -42,9 +62,27 @@ components:
     TransactionResponse:
       type: object
       properties:
-        accountId:
+        transactionId:
+          type: string
+        account:
           type: string
         status:
           type: string
         lastTransactionAmount:
           type: number
+    Transaction:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        account:
+          type: string
+        transactionMessage:
+          type: string
+        amount:
+          type: number
+        type:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
