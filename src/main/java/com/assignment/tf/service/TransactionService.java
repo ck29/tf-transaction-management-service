@@ -4,11 +4,13 @@ import com.assignment.tf.client.AccountServiceInterface;
 import com.assignment.tf.controller.request.TransactionRequest;
 import com.assignment.tf.controller.request.TransactionStatus;
 import com.assignment.tf.controller.request.TransactionType;
+import com.assignment.tf.controller.response.Transaction;
 import com.assignment.tf.controller.response.TransactionResponse;
 import com.assignment.tf.exception.AccountNotFoundException;
 import com.assignment.tf.mapper.TransactionMapper;
 import com.assignment.tf.repository.TransactionRepositoryService;
 import com.assignment.tf.repository.entities.TransactionEntity;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,10 @@ public class TransactionService {
 
   private final AccountServiceInterface client;
   private final TransactionRepositoryService repositoryService;
+
+  public List<Transaction> getTransactions(String iban){
+    return TransactionMapper.mapToTransactions(repositoryService.getAllTransactions(iban));
+  }
 
   public TransactionResponse transact(TransactionRequest transactionRequest) {
     TransactionEntity entity = null;

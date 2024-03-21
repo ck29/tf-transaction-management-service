@@ -33,7 +33,7 @@ public class TransactionControllerIntegrationTest extends AbstractControllerInte
     when(accountServiceClient.credit(any(),any())).thenReturn(new TransactionResponse("aRecepient","success" , new BigDecimal("500")));
     when(accountServiceClient.debit(any(),any())).thenReturn(new TransactionResponse("aSender","success" , new BigDecimal("500")));
 
-    MvcResult result = performPost("/new", request)
+    MvcResult result = performPost("/transactions", request)
         .andExpect(status().is2xxSuccessful())
         .andReturn();
 

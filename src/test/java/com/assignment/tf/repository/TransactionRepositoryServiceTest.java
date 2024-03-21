@@ -8,6 +8,7 @@ import com.assignment.tf.controller.request.TransactionRequest;
 import com.assignment.tf.controller.request.TransactionType;
 import com.assignment.tf.repository.entities.TransactionEntity;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ class TransactionRepositoryServiceTest {
 
   @Test
   void getAllTransactions_returnAllEntities() {
-    when(repository.findBySender(any())).thenReturn(Optional.of(List.of(new TransactionEntity().setSender("adSender"))));
+    when(repository.findAllBySender(any())).thenReturn(List.of(new TransactionEntity().setSender("adSender")));
 
     List<TransactionEntity> entities =  transactionRepositoryService.getAllTransactions("aSender");
     assertEquals(entities.size(),1);
@@ -34,7 +35,7 @@ class TransactionRepositoryServiceTest {
   }
   @Test
   void getAllTransactions_returnNull() {
-    when(repository.findBySender(any())).thenReturn(Optional.empty());
+    when(repository.findAllBySender(any())).thenReturn(new ArrayList<>());
 
     List<TransactionEntity> entities =  transactionRepositoryService.getAllTransactions("aSender");
     assertEquals(entities.size(),0);
