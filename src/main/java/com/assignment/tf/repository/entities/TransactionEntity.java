@@ -7,8 +7,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
+
 @Data
 @Entity
 @Accessors(chain = true)
@@ -18,11 +21,8 @@ public class TransactionEntity {
   @GeneratedValue(strategy = GenerationType.UUID)
   private String transactionId;
 
-  @Column(name = "sender", nullable = false)
-  private String sender;
-
-  @Column(name="recipient", nullable = false)
-  private String recipient;
+  @Column(name = "account", nullable = false)
+  private String account;
 
   @Column(name="transaction-message", nullable = false)
   private String transactionMessage;
@@ -32,6 +32,10 @@ public class TransactionEntity {
 
   @Column(name="type", nullable = false)
   private String type;
+
+  @CreationTimestamp
+  @Column(name="created_timestamp", nullable = false)
+  private LocalDateTime createdTimestamp;
 
 }
 

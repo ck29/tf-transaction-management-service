@@ -84,13 +84,14 @@ public class TransactionServiceTest {
   }
 
   private TransactionRequest createMockTransactionRequest() {
-    return new TransactionRequest("aRecipient",
-        "aSender",
-        new BigDecimal("1000"),
-        "test_messgae");
+    return new TransactionRequest()
+        .setTransactionMessage("test_message")
+        .setSenderAccount("aSender")
+        .setAmount(new BigDecimal("1000"))
+        .setRecipientAccount("aRecipient");
   }
 
   private TransactionResponse mockTransactionResponse(){
-    return new TransactionResponse("aAccountId", "success", new BigDecimal("200"));
+    return new TransactionResponse("atransactiond", "aAccountId", "success", new BigDecimal("200"));
   }
 }

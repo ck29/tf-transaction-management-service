@@ -15,15 +15,16 @@ public class TransactionRepositoryService {
   private final TransactionRepository repository;
 
   public List<TransactionEntity> getAllTransactions(String senderid) {
-    return repository.findBySender(senderid).orElse(new ArrayList<TransactionEntity>());
+    return repository.findAllByAccount(senderid);
   }
 
   public TransactionEntity saveTransaction(TransactionRequest request, TransactionType type) {
     return repository.save(new TransactionEntity()
-        .setRecipient(request.recipientAccount())
-        .setTransactionMessage(request.transactionMessage())
-        .setSender(request.senderAccount())
-        .setAmount(request.amount())
+        .setTransactionMessage(request.getTransactionMessage())
+        .setAccount(TransactionType.CREDIT.getValue().equals(type.getValue()) ?
+               request.getRecipientAccount():
+                request.getSenderAccount())
+        .setAmount(request.getAmount())
         .setType(type.getValue()));
   }
 
