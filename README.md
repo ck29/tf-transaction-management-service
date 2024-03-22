@@ -111,8 +111,8 @@ Make sure the following tools are installed on your local machine.
    Host: localhost:8085
    Content-Type: application/json
    {
-  "recipientAccount": "ace4e1-e23cb-3eaddf-45ffbcea",
-  "senderAccount": "ace4e2-e23cb-3eaddf-45ffbeace",
+  "recipientAccount": "NL66ABNA0112234968",
+  "senderAccount": "NL04ABNA0169208646",
   "amount": 550,
   "transactionMessage": "test_message"
    }
