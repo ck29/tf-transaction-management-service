@@ -2,6 +2,7 @@ openapi: 3.0.1
 info:
   title: Transaction Management API
   version: v1
+
 servers:
   - url: http://localhost:8085/transaction-service/v1/api
     description: Generated server url
@@ -49,14 +50,24 @@ paths:
 components:
   schemas:
     TransactionRequest:
+      required:
+        - amount
+        - recipientAccount
+        - senderAccount
+        - transactionMessage
       type: object
       properties:
         recipientAccount:
           type: string
+          example: NL66ABNA0112234968
         senderAccount:
           type: string
+          example: NL66ABNA0112234928
         amount:
+          minimum: 0
+          exclusiveMinimum: true
           type: number
+          example: 2000
         transactionMessage:
           type: string
     TransactionResponse:
