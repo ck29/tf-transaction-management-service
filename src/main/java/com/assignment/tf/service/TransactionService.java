@@ -28,16 +28,16 @@ public class TransactionService {
   public TransactionResponse transact(TransactionRequest transactionRequest) {
     TransactionEntity entity = null;
 
-    client.debit(transactionRequest.senderAccount(), transactionRequest.amount());
+    client.debit(transactionRequest.getSenderAccount(), transactionRequest.getAmount());
     repositoryService.saveTransaction(transactionRequest, TransactionType.DEBIT);
 
     try {
-      client.credit(transactionRequest.recipientAccount(), transactionRequest.amount());
+      client.credit(transactionRequest.getRecipientAccount(), transactionRequest.getAmount());
       entity = repositoryService.saveTransaction(transactionRequest, TransactionType.CREDIT);
 
     } catch (AccountNotFoundException e) {
 
-      client.credit(transactionRequest.senderAccount(), transactionRequest.amount());
+      client.credit(transactionRequest.getSenderAccount(), transactionRequest.getAmount());
       repositoryService.saveTransaction(transactionRequest, TransactionType.CREDIT);
       throw e;
     }

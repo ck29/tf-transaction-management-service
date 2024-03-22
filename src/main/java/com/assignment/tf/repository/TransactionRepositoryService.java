@@ -20,11 +20,11 @@ public class TransactionRepositoryService {
 
   public TransactionEntity saveTransaction(TransactionRequest request, TransactionType type) {
     return repository.save(new TransactionEntity()
-        .setTransactionMessage(request.transactionMessage())
+        .setTransactionMessage(request.getTransactionMessage())
         .setAccount(TransactionType.CREDIT.getValue().equals(type.getValue()) ?
-               request.recipientAccount():
-                request.senderAccount())
-        .setAmount(request.amount())
+               request.getRecipientAccount():
+                request.getSenderAccount())
+        .setAmount(request.getAmount())
         .setType(type.getValue()));
   }
 

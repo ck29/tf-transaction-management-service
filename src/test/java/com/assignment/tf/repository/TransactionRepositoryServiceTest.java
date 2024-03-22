@@ -27,7 +27,7 @@ class TransactionRepositoryServiceTest {
 
   @Test
   void getAllTransactions_returnAllEntities() {
-    when(repository.findAllBySender(any())).thenReturn(List.of(new TransactionEntity().setSender("adSender")));
+    when(repository.findAllByAccount(any())).thenReturn(List.of(new TransactionEntity().setAccount("adSender")));
 
     List<TransactionEntity> entities =  transactionRepositoryService.getAllTransactions("aSender");
     assertEquals(entities.size(),1);
@@ -35,7 +35,7 @@ class TransactionRepositoryServiceTest {
   }
   @Test
   void getAllTransactions_returnNull() {
-    when(repository.findAllBySender(any())).thenReturn(new ArrayList<>());
+    when(repository.findAllByAccount(any())).thenReturn(new ArrayList<>());
 
     List<TransactionEntity> entities =  transactionRepositoryService.getAllTransactions("aSender");
     assertEquals(entities.size(),0);
@@ -44,9 +44,10 @@ class TransactionRepositoryServiceTest {
 
 
   private TransactionRequest createMockTransactionRequest() {
-    return new TransactionRequest("aRecipient",
-        "aSender",
-        new BigDecimal("1000"),
-        "test_messgae");
+    return new TransactionRequest()
+        .setTransactionMessage("test_message")
+        .setSenderAccount("aSender")
+        .setAmount(new BigDecimal("1000"))
+        .setRecipientAccount("aRecipient");
   }
 }
